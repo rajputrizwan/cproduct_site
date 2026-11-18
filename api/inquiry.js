@@ -26,9 +26,9 @@ module.exports = async function handler(req, res) {
       body: JSON.stringify({
         name: cleanName,
         email: cleanEmail,
-        message: cleanMessage,
-        marketing_opt_in: marketingOptIn,
-        submitted_at: new Date().toISOString(),
+        question: cleanMessage,
+        marketing_consent: marketingOptIn,
+        date: new Date().toISOString(),
         source: "landing_page",
       }),
     });
