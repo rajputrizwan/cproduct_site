@@ -11,7 +11,7 @@ After the Pabbly webhook trigger, add a Google Sheets **Add New Row** action and
 | Name | `name` |
 | Email | `email` |
 | Product Question | `question` |
-| Marketing Consent | `marketing_consent` |
-| Date | `date` |
+| Marketing Consent (`Y` or `N`) | `marketing_consent` |
+| Submission date (if provided) | `date` |
 
 The endpoint also sends `source` (`landing_page`) for attribution. The website confirmation means Pabbly accepted the webhook request; Google Sheets will receive rows only after the Google Sheets action is connected and the workflow is switched on.

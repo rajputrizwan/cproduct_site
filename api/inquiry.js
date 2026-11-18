@@ -27,7 +27,7 @@ module.exports = async function handler(req, res) {
         name: cleanName,
         email: cleanEmail,
         question: cleanMessage,
-        marketing_consent: marketingOptIn,
+        marketing_consent: marketingOptIn ? "Y" : "N",
         date: new Date().toISOString(),
         source: "landing_page",
       }),
