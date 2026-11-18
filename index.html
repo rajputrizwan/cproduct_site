@@ -530,6 +530,77 @@
         color: #f3f0e8;
         margin: 0;
       }
+      .inquiry {
+        background: var(--sage);
+      }
+      .inquiry-inner {
+        max-width: 680px;
+      }
+      .inquiry-form {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+        margin-top: 28px;
+      }
+      .inquiry-form label {
+        display: grid;
+        gap: 6px;
+        color: var(--ink);
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .inquiry-form .wide {
+        grid-column: 1 / -1;
+      }
+      .inquiry-form input,
+      .inquiry-form textarea {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        background: #fffdf8;
+        color: var(--ink);
+        font: 14px/1.5 var(--sans);
+        padding: 12px;
+      }
+      .inquiry-form textarea {
+        min-height: 110px;
+        resize: vertical;
+      }
+      .inquiry-form .consent {
+        grid-template-columns: 18px 1fr;
+        align-items: start;
+        color: var(--body);
+        font-size: 11px;
+        font-weight: 400;
+      }
+      .inquiry-form .consent input {
+        width: 16px;
+        height: 16px;
+        margin: 2px 0 0;
+        accent-color: var(--terra);
+      }
+      .inquiry-form .button {
+        border: 0;
+        cursor: pointer;
+        justify-self: start;
+      }
+      .form-status {
+        min-height: 1.5em;
+        margin: 0;
+        font-size: 12px;
+      }
+      .form-note {
+        margin: 12px 0 0;
+        color: var(--muted);
+        font-size: 11px;
+      }
+      .honeypot {
+        position: absolute;
+        left: -10000px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
       .sub-link {
         font-size: 12px;
         color: #d3d1c8;
@@ -706,6 +777,14 @@
         }
         .privacy button {
           padding: 0 10px;
+        }
+      }
+      @media (max-width: 560px) {
+        .inquiry-form {
+          grid-template-columns: 1fr;
+        }
+        .inquiry-form .wide {
+          grid-column: auto;
         }
       }
       @media (prefers-reduced-motion: reduce) {
@@ -1149,6 +1228,40 @@
           </p>
         </div>
       </section>
+      <!-- CUSTOMER INQUIRY -->
+      <section class="section inquiry" id="inquiry">
+        <div class="shell inquiry-inner fade">
+          <p class="eyebrow" data-t="inquiryEyebrow">A QUESTION ABOUT YOUR ROUTINE?</p>
+          <h2 class="title" data-t="inquiryTitle">We’re here to help.</h2>
+          <p data-t="inquiryIntro">Send a product question and our team can get back to you.</p>
+          <form class="inquiry-form" id="inquiryForm">
+            <label>
+              <span data-t="nameLabel">Name</span>
+              <input name="name" autocomplete="name" maxlength="100" required />
+            </label>
+            <label>
+              <span data-t="emailLabel">Email</span>
+              <input name="email" type="email" autocomplete="email" maxlength="254" required />
+            </label>
+            <label class="wide">
+              <span data-t="messageLabel">How can we help?</span>
+              <textarea name="message" maxlength="2000" required></textarea>
+            </label>
+            <label class="consent wide">
+              <input name="marketing_opt_in" type="checkbox" value="yes" />
+              <span data-t="marketingConsent">I agree to receive occasional product and routine updates. I can opt out at any time.</span>
+            </label>
+            <div class="wide">
+              <button class="button" type="submit" data-t="sendInquiry">Send inquiry</button>
+              <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+            </div>
+            <p class="form-note wide" data-t="inquiryPrivacy">We use your details to respond to this inquiry. Marketing updates are sent only if you opt in.</p>
+            <label class="honeypot" aria-hidden="true" tabindex="-1">
+              Website <input name="website" tabindex="-1" autocomplete="off" />
+            </label>
+          </form>
+        </div>
+      </section>
       <!-- CLOSING -->
       <section class="closing">
         <div class="shell fade">
@@ -1204,9 +1317,9 @@
       // [CAMPAIGN_WHATSAPP_NUMBER] Replace with a number in international format, without + or spaces.
       // [CAMPAIGN_HANDLE] Replace with the Instagram handle without @.
       // [AR_STORE_URL] Optional Arabic store page URL. Default remains the required UAE product URL.
-      const GA4_ID = "G-XXXXXXXXXX",
+      const GA4_ID = "G-E1V32WHHW7",
         CAMPAIGN_WHATSAPP_NUMBER = "[CAMPAIGN_WHATSAPP_NUMBER]",
-        CAMPAIGN_HANDLE = "[CAMPAIGN_HANDLE]",
+        CAMPAIGN_HANDLE = "loccitane_body_scrub",
         AR_STORE_URL = "[AR_STORE_URL]";
       const STORE_URL =
         "https://ae.loccitane.com/en/body-care/shea-butter-rich-body-scrub/01EC200K26.html";
@@ -1293,12 +1406,21 @@
           closingEyebrow: "YOUR NEXT RITUAL",
           closingTitle: "Softer skin, one step at a time.",
           closingShop: "Shop Shea Butter Rich Body Scrub ↗",
+          inquiryEyebrow: "A QUESTION ABOUT YOUR ROUTINE?",
+          inquiryTitle: "We’re here to help.",
+          inquiryIntro: "Send a product question and our team can get back to you.",
+          nameLabel: "Name",
+          emailLabel: "Email",
+          messageLabel: "How can we help?",
+          marketingConsent: "I agree to receive occasional product and routine updates. I can opt out at any time.",
+          sendInquiry: "Send inquiry",
+          inquiryPrivacy: "We use your details to respond to this inquiry. Marketing updates are sent only if you opt in.",
           whatsapp: "Questions? Chat on WhatsApp",
           footerTag: "Powerful yet gentle.",
           disclosure:
             "Academic marketing project (ENT4113). This is not the official L'Occitane website. Product information and images © L'Occitane en Provence, sourced from ae.loccitane.com.",
           privacy:
-            "This student project uses optional Google Analytics to understand store link engagement. No personal data is stored.",
+            "Optional Google Analytics measures visits and store-link engagement. Inquiry details go to Google Sheets to answer your question. Marketing updates are sent only if you opt in.",
           allow: "Allow analytics",
         },
         ar: {
@@ -1374,12 +1496,21 @@
           closingEyebrow: "طقسك القادم",
           closingTitle: "نعومة أكثر، خطوة بعد خطوة.",
           closingShop: "تسوّقي مقشّر الجسم الغني بزبدة الشيا ↗",
+          inquiryEyebrow: "هل لديك سؤال عن روتين العناية؟",
+          inquiryTitle: "نحن هنا لمساعدتك.",
+          inquiryIntro: "أرسلي سؤالك عن المنتج وسنعاود التواصل معك.",
+          nameLabel: "الاسم",
+          emailLabel: "البريد الإلكتروني",
+          messageLabel: "كيف يمكننا مساعدتك؟",
+          marketingConsent: "أوافق على تلقي تحديثات من حين لآخر عن المنتجات وروتين العناية. يمكنني إلغاء الاشتراك في أي وقت.",
+          sendInquiry: "إرسال الاستفسار",
+          inquiryPrivacy: "نستخدم بياناتك للرد على استفسارك. لا نرسل تحديثات تسويقية إلا بعد موافقتك.",
           whatsapp: "لديك سؤال؟ تواصلي عبر واتساب",
           footerTag: "فعّال ولطيف.",
           disclosure:
             "مشروع تسويقي أكاديمي (ENT4113). هذا الموقع ليس الموقع الرسمي للوكسيتان. معلومات المنتج والصور © لوكسيتان أون بروفانس، من ae.loccitane.com.",
           privacy:
-            "يستخدم هذا المشروع الطلابي تحليلات Google اختيارية لفهم التفاعل مع روابط المتجر. لا تُحفَظ أي بيانات شخصية.",
+            "تحليلات Google اختيارية لقياس الزيارات والتفاعل مع روابط المتجر. تُرسل بيانات الاستفسار إلى Google Sheets للرد عليك. لا نرسل تحديثات تسويقية إلا بعد موافقتك.",
           allow: "السماح بالتحليلات",
         },
       };
@@ -1431,7 +1562,7 @@
         .querySelectorAll(".store")
         .forEach((a) =>
           a.addEventListener("click", () =>
-            track("store_click", { button_location: a.dataset.location }),
+            track("shop_now_click", { button_location: a.dataset.location }),
           ),
         );
       document.querySelector(".whatsapp").href =
@@ -1448,6 +1579,39 @@
       document
         .querySelector(".instagram")
         .addEventListener("click", () => track("instagram_click"));
+      document.getElementById("inquiryForm").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const form = event.currentTarget;
+        const status = document.getElementById("formStatus");
+        const submit = form.querySelector('[type="submit"]');
+        const formData = new FormData(form);
+        if (formData.get("website")) return;
+        const payload = {
+          name: formData.get("name"),
+          email: formData.get("email"),
+          message: formData.get("message"),
+          marketing_opt_in: formData.get("marketing_opt_in") === "yes",
+        };
+        submit.disabled = true;
+        status.textContent = lang === "ar" ? "جارٍ إرسال استفسارك…" : "Sending your inquiry…";
+        try {
+          const response = await fetch("/api/inquiry", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          if (!response.ok) throw new Error("Inquiry could not be sent");
+          status.textContent = lang === "ar" ? "تم إرسال استفسارك. شكراً لك." : "Your inquiry was sent. Thank you.";
+          form.reset();
+          track("inquiry_submit", { marketing_opt_in: payload.marketing_opt_in });
+        } catch (error) {
+          status.textContent = lang === "ar"
+            ? "تعذّر الإرسال الآن. يُرجى المحاولة لاحقاً."
+            : "We couldn’t send that just now. Please try again later.";
+        } finally {
+          submit.disabled = false;
+        }
+      });
       document.getElementById("allow").addEventListener("click", () => {
         document.getElementById("privacy").hidden = true;
         let s = document.createElement("script");
